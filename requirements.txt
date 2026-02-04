@@ -15,6 +15,7 @@ seaborn>=0.11.0
 # Data persistence
 pickle5>=0.0.11;python_version<"3.8"
 
-# Optional: for real GitHub Archive data
-# google-cloud-bigquery>=3.0.0
-# pyarrow>=7.0.0
+# For real GitHub Archive data via BigQuery
+google-cloud-bigquery>=3.0.0
+pyarrow>=7.0.0
+db-dtypes>=1.0.0  # For BigQuery data types

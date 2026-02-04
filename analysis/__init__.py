@@ -10,6 +10,7 @@ Modules:
 - metrics: Task-level and job-level metric extraction
 - statistical_analysis: ITS and DiD regression analysis
 - visualizations: Publication-quality figure generation
+- bigquery_client: Real GitHub Archive data via Google BigQuery
 - run_analysis: Main analysis orchestration script
 """
 
@@ -27,6 +28,18 @@ from .statistical_analysis import (
     HeterogeneityAnalysis,
     run_full_analysis
 )
+
+# BigQuery client (optional - requires google-cloud-bigquery)
+try:
+    from .bigquery_client import (
+        BigQueryGitHubClient,
+        GitHubArchiveDataLoader,
+        MonthlyMetricsQuery,
+        create_bigquery_client,
+        BIGQUERY_AVAILABLE
+    )
+except ImportError:
+    BIGQUERY_AVAILABLE = False
 
 __version__ = "0.1.0"
 __author__ = "Task-Job Paradox Research Team"
