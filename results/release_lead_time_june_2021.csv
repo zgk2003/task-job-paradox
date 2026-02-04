@@ -1,0 +1,3 @@
+year_month,high_exposure,num_releases,num_repos,avg_release_lead_time_hours,median_release_lead_time_hours,std_release_lead_time_hours
+2021-06,False,521,161,12.41842610364683,0,42.177208188724514
+2021-06,True,63251,21076,27.22334824745855,0,78.78345041590715
