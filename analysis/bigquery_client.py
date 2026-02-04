@@ -483,6 +483,292 @@ class MonthlyMetricsQuery:
 
         return query
 
+    @staticmethod
+    def build_release_metrics_query(
+        start_date: date = date(2021, 1, 1),
+        end_date: date = date(2025, 6, 30),
+        languages: Optional[List[str]] = None
+    ) -> str:
+        """
+        Build query for release-level (true job) metrics.
+
+        This measures the ultimate job outcome: shipping releases to users.
+        Metrics include:
+        - Release frequency (releases per month)
+        - Release lead time (time from first commit to release)
+
+        Args:
+            start_date: Start of observation window
+            end_date: End of observation window
+            languages: List of languages to include
+
+        Returns:
+            SQL query string
+        """
+        if languages is None:
+            languages = ALL_LANGUAGES
+
+        lang_list = ", ".join(f"'{lang}'" for lang in languages)
+        high_exp_list = ", ".join(f"'{lang}'" for lang in HIGH_EXPOSURE_LANGUAGES)
+
+        start_ym = start_date.strftime('%Y%m')
+        end_ym = end_date.strftime('%Y%m')
+        treatment_str = TREATMENT_DATE.strftime('%Y-%m-%d')
+
+        query = f"""
+        -- Release Metrics for Job-Level Analysis
+        -- True job outcome: shipping releases to users
+
+        WITH
+        -- Get release events
+        releases AS (
+            SELECT
+                repo.id AS repo_id,
+                repo.name AS repo_name,
+                JSON_EXTRACT_SCALAR(payload, '$.release.id') AS release_id,
+                JSON_EXTRACT_SCALAR(payload, '$.release.tag_name') AS tag_name,
+                JSON_EXTRACT_SCALAR(payload, '$.release.prerelease') AS is_prerelease,
+                JSON_EXTRACT_SCALAR(payload, '$.release.draft') AS is_draft,
+                JSON_EXTRACT_SCALAR(payload, '$.release.created_at') AS release_created_at,
+                JSON_EXTRACT_SCALAR(payload, '$.release.published_at') AS release_published_at,
+                JSON_EXTRACT_SCALAR(payload, '$.release.target_commitish') AS target_branch,
+                created_at AS event_time
+            FROM `githubarchive.month.*`
+            WHERE
+                _TABLE_SUFFIX BETWEEN '{start_ym}' AND '{end_ym}'
+                AND type = 'ReleaseEvent'
+                AND JSON_EXTRACT_SCALAR(payload, '$.action') = 'published'
+        ),
+
+        -- Get repository language info from recent PushEvents
+        repo_languages AS (
+            SELECT DISTINCT
+                repo.id AS repo_id,
+                FIRST_VALUE(JSON_EXTRACT_SCALAR(payload, '$.repository.language'))
+                    OVER (PARTITION BY repo.id ORDER BY created_at DESC) AS language
+            FROM `githubarchive.month.*`
+            WHERE
+                _TABLE_SUFFIX BETWEEN '{start_ym}' AND '{end_ym}'
+                AND type = 'PushEvent'
+                AND JSON_EXTRACT_SCALAR(payload, '$.repository.language') IS NOT NULL
+        ),
+
+        -- Join releases with language info
+        releases_with_lang AS (
+            SELECT
+                r.repo_id,
+                r.repo_name,
+                r.release_id,
+                r.tag_name,
+                r.is_prerelease,
+                l.language,
+                CASE WHEN l.language IN ({high_exp_list}) THEN TRUE ELSE FALSE END AS high_exposure,
+                PARSE_TIMESTAMP('%Y-%m-%dT%H:%M:%SZ', r.release_published_at) AS published_at,
+                r.event_time
+            FROM releases r
+            LEFT JOIN repo_languages l ON r.repo_id = l.repo_id
+            WHERE
+                l.language IN ({lang_list})
+                AND r.is_prerelease = 'false'
+                AND r.is_draft = 'false'
+        ),
+
+        -- Calculate release-level metrics
+        release_metrics AS (
+            SELECT
+                repo_id,
+                repo_name,
+                release_id,
+                language,
+                high_exposure,
+                published_at,
+                FORMAT_TIMESTAMP('%Y-%m', published_at) AS year_month,
+                EXTRACT(YEAR FROM published_at) AS year,
+                EXTRACT(MONTH FROM published_at) AS month,
+                CASE WHEN published_at >= '{treatment_str}' THEN TRUE ELSE FALSE END AS post_treatment,
+                -- Time since previous release (release cycle time)
+                TIMESTAMP_DIFF(
+                    published_at,
+                    LAG(published_at) OVER (PARTITION BY repo_id ORDER BY published_at),
+                    DAY
+                ) AS days_since_last_release
+            FROM releases_with_lang
+        ),
+
+        -- Filter active repos with multiple releases
+        active_release_repos AS (
+            SELECT repo_id
+            FROM release_metrics
+            GROUP BY repo_id
+            HAVING COUNT(*) >= 3  -- At least 3 releases for meaningful analysis
+        )
+
+        -- Aggregate to monthly level
+        SELECT
+            year_month,
+            year,
+            month,
+            high_exposure,
+            post_treatment,
+
+            -- Sample sizes
+            COUNT(DISTINCT repo_id) AS num_repos_with_releases,
+            COUNT(*) AS num_releases,
+
+            -- Release frequency (releases per repo per month)
+            COUNT(*) * 1.0 / NULLIF(COUNT(DISTINCT repo_id), 0) AS avg_releases_per_repo,
+
+            -- Release cycle time (days between releases)
+            AVG(days_since_last_release) AS avg_release_cycle_days,
+            APPROX_QUANTILES(days_since_last_release, 100)[OFFSET(50)] AS median_release_cycle_days,
+            STDDEV(days_since_last_release) AS std_release_cycle_days
+
+        FROM release_metrics
+        WHERE
+            repo_id IN (SELECT repo_id FROM active_release_repos)
+            AND days_since_last_release IS NOT NULL
+            AND days_since_last_release BETWEEN 1 AND 365  -- Filter outliers
+        GROUP BY year_month, year, month, high_exposure, post_treatment
+        ORDER BY year_month, high_exposure
+        """
+
+        return query
+
+    @staticmethod
+    def build_repo_controls_query(
+        start_date: date = date(2021, 1, 1),
+        end_date: date = date(2025, 6, 30),
+        languages: Optional[List[str]] = None
+    ) -> str:
+        """
+        Build query for repository-level control variables.
+
+        Extracts time-varying controls at repository-month level:
+        - Contributor count
+        - Activity level (commits, PRs per month)
+        - Repository characteristics
+
+        These are used as controls in the DiD regression.
+
+        Args:
+            start_date: Start of observation window
+            end_date: End of observation window
+            languages: List of languages to include
+
+        Returns:
+            SQL query string
+        """
+        if languages is None:
+            languages = ALL_LANGUAGES
+
+        lang_list = ", ".join(f"'{lang}'" for lang in languages)
+        high_exp_list = ", ".join(f"'{lang}'" for lang in HIGH_EXPOSURE_LANGUAGES)
+
+        start_ym = start_date.strftime('%Y%m')
+        end_ym = end_date.strftime('%Y%m')
+        treatment_str = TREATMENT_DATE.strftime('%Y-%m-%d')
+
+        query = f"""
+        -- Repository-Level Control Variables
+        -- Time-varying controls for DiD regression
+
+        WITH
+        -- Monthly activity by repository
+        monthly_activity AS (
+            SELECT
+                repo.id AS repo_id,
+                repo.name AS repo_name,
+                FORMAT_TIMESTAMP('%Y-%m', created_at) AS year_month,
+                EXTRACT(YEAR FROM created_at) AS year,
+                EXTRACT(MONTH FROM created_at) AS month,
+
+                -- Activity counts by event type
+                COUNTIF(type = 'PushEvent') AS push_count,
+                COUNTIF(type = 'PullRequestEvent') AS pr_event_count,
+                COUNTIF(type = 'IssuesEvent') AS issue_count,
+                COUNTIF(type = 'ForkEvent') AS fork_count,
+                COUNTIF(type = 'WatchEvent') AS star_count,
+
+                -- Unique contributors
+                COUNT(DISTINCT actor.id) AS unique_contributors,
+
+                -- First appearance of repo (proxy for age)
+                MIN(created_at) AS first_event_in_period
+
+            FROM `githubarchive.month.*`
+            WHERE
+                _TABLE_SUFFIX BETWEEN '{start_ym}' AND '{end_ym}'
+            GROUP BY repo.id, repo.name, year_month, year, month
+        ),
+
+        -- Get language for each repo
+        repo_languages AS (
+            SELECT DISTINCT
+                repo.id AS repo_id,
+                FIRST_VALUE(JSON_EXTRACT_SCALAR(payload, '$.repository.language'))
+                    OVER (PARTITION BY repo.id ORDER BY created_at DESC) AS language
+            FROM `githubarchive.month.*`
+            WHERE
+                _TABLE_SUFFIX BETWEEN '{start_ym}' AND '{end_ym}'
+                AND type = 'PushEvent'
+                AND JSON_EXTRACT_SCALAR(payload, '$.repository.language') IS NOT NULL
+        ),
+
+        -- Combine activity with language
+        repo_monthly AS (
+            SELECT
+                a.repo_id,
+                a.repo_name,
+                a.year_month,
+                a.year,
+                a.month,
+                l.language,
+                CASE WHEN l.language IN ({high_exp_list}) THEN TRUE ELSE FALSE END AS high_exposure,
+                CASE WHEN a.first_event_in_period >= '{treatment_str}' THEN TRUE ELSE FALSE END AS post_treatment,
+
+                a.push_count,
+                a.pr_event_count,
+                a.issue_count,
+                a.fork_count,
+                a.star_count,
+                a.unique_contributors,
+
+                -- Coordination intensity proxy
+                CASE WHEN a.unique_contributors > 10 THEN TRUE ELSE FALSE END AS high_coordination
+
+            FROM monthly_activity a
+            LEFT JOIN repo_languages l ON a.repo_id = l.repo_id
+            WHERE l.language IN ({lang_list})
+        )
+
+        -- Aggregate to monthly level by exposure
+        SELECT
+            year_month,
+            year,
+            month,
+            high_exposure,
+            high_coordination,
+            post_treatment,
+
+            COUNT(DISTINCT repo_id) AS num_repos,
+
+            -- Activity metrics (potential controls)
+            AVG(push_count) AS avg_pushes_per_repo,
+            AVG(pr_event_count) AS avg_pr_events_per_repo,
+            AVG(issue_count) AS avg_issues_per_repo,
+            AVG(unique_contributors) AS avg_contributors_per_repo,
+
+            -- Distribution of coordination intensity
+            COUNTIF(high_coordination) AS num_high_coordination_repos,
+            COUNTIF(NOT high_coordination) AS num_low_coordination_repos
+
+        FROM repo_monthly
+        GROUP BY year_month, year, month, high_exposure, high_coordination, post_treatment
+        ORDER BY year_month, high_exposure, high_coordination
+        """
+
+        return query
+
 
 class GitHubArchiveDataLoader:
     """
@@ -631,6 +917,125 @@ class GitHubArchiveDataLoader:
             )
 
         return quality
+
+    def load_release_metrics(
+        self,
+        start_date: date = date(2021, 1, 1),
+        end_date: date = date(2025, 6, 30),
+        dry_run: bool = False,
+        max_cost_usd: float = 5.0
+    ) -> pd.DataFrame:
+        """
+        Load monthly release metrics for job-level analysis.
+
+        Args:
+            start_date: Start of observation window
+            end_date: End of observation window
+            dry_run: If True, only estimate costs
+            max_cost_usd: Maximum cost per query
+
+        Returns:
+            DataFrame with monthly release metrics by exposure level
+        """
+        print("\n" + "="*60)
+        print("LOADING RELEASE METRICS (JOB-LEVEL) FROM GITHUB ARCHIVE")
+        print("="*60)
+        print(f"Date range: {start_date} to {end_date}")
+
+        release_query = self.query_builder.build_release_metrics_query(
+            start_date=start_date,
+            end_date=end_date
+        )
+
+        release_df = self.client.run_query(
+            release_query, dry_run=dry_run, max_cost_usd=max_cost_usd
+        )
+
+        if dry_run or release_df.empty:
+            return pd.DataFrame()
+
+        # Post-process
+        release_df['date'] = pd.to_datetime(release_df['year_month'] + '-01')
+        release_df = release_df.sort_values(['year_month', 'high_exposure'])
+
+        print(f"\nLoaded {len(release_df)} monthly release observations")
+        print(f"Total releases: {release_df['num_releases'].sum():,}")
+
+        return release_df
+
+    def load_full_hierarchy(
+        self,
+        start_date: date = date(2021, 1, 1),
+        end_date: date = date(2025, 6, 30),
+        dry_run: bool = False,
+        max_cost_usd: float = 5.0
+    ) -> Dict[str, pd.DataFrame]:
+        """
+        Load all metrics across the task-PR-release hierarchy.
+
+        This is the main entry point for comprehensive analysis.
+
+        Args:
+            start_date: Start of observation window
+            end_date: End of observation window
+            dry_run: If True, only estimate costs
+            max_cost_usd: Maximum cost per query
+
+        Returns:
+            Dict with DataFrames for each metric level:
+            - 'task': Review response latency (task-level)
+            - 'pr': PR metrics (intermediate level)
+            - 'release': Release metrics (job-level)
+            - 'controls': Repository-level controls
+        """
+        print("\n" + "="*70)
+        print("LOADING FULL METRIC HIERARCHY")
+        print("Task → PR → Release")
+        print("="*70)
+
+        results = {}
+
+        # 1. PR metrics (includes task-level review latency)
+        print("\n[1/3] Loading PR metrics (task + intermediate level)...")
+        results['pr'] = self.load_monthly_metrics(
+            start_date=start_date,
+            end_date=end_date,
+            include_review_latency=True,
+            dry_run=dry_run,
+            max_cost_usd=max_cost_usd
+        )
+
+        if dry_run:
+            return results
+
+        # 2. Release metrics (job-level)
+        print("\n[2/3] Loading release metrics (job level)...")
+        results['release'] = self.load_release_metrics(
+            start_date=start_date,
+            end_date=end_date,
+            dry_run=dry_run,
+            max_cost_usd=max_cost_usd
+        )
+
+        # 3. Repository controls
+        print("\n[3/3] Loading repository controls...")
+        controls_query = self.query_builder.build_repo_controls_query(
+            start_date=start_date,
+            end_date=end_date
+        )
+        results['controls'] = self.client.run_query(
+            controls_query, dry_run=dry_run, max_cost_usd=max_cost_usd
+        )
+
+        # Summary
+        print("\n" + "="*70)
+        print("HIERARCHY LOADING COMPLETE")
+        print("="*70)
+        for level, df in results.items():
+            if not df.empty:
+                print(f"  {level}: {len(df)} rows")
+
+        return results
 
 
 def create_bigquery_client(
