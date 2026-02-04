@@ -10,3 +10,16 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Large data files (keep monthly aggregates, exclude PR-level)
+results/pr_level_data.csv
+data/*.pkl
