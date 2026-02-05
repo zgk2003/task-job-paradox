@@ -23,3 +23,13 @@ build/
 # Large data files (keep monthly aggregates, exclude PR-level)
 results/pr_level_data.csv
 data/*.pkl
+
+# Panel data (too large for git, ~700MB)
+data/panel/
+
+# Temp Office files
+~$*
+
+# Video output (regenerate with create_video.py)
+presentation/*.mp4
+presentation/audio/
