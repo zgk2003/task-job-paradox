@@ -19,6 +19,7 @@ Modules:
 - statistical_analysis: ITS and DiD for causal identification
 - visualizations: Publication-quality figures
 - run_analysis: Main orchestration script
+- panel_regression: Proper ITS/DiD with segmented regression and event studies
 """
 
 from .config import (
@@ -54,6 +55,18 @@ from .visualizations import (
 )
 
 from .run_analysis import run_full_analysis
+
+# Panel regression (proper econometric methods)
+try:
+    from .panel_regression import (
+        InterruptedTimeSeriesRegression,
+        DiDRegression,
+        EventStudy,
+        run_full_panel_analysis,
+    )
+    PANEL_REGRESSION_AVAILABLE = True
+except ImportError:
+    PANEL_REGRESSION_AVAILABLE = False
 
 __all__ = [
     # Config

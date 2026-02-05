@@ -1,0 +1,436 @@
+{
+  "collected": {
+    "velocity_2021_01": {
+      "path": "data/panel/velocity/velocity_2021_01.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:42:05.018621"
+    },
+    "velocity_2021_02": {
+      "path": "data/panel/velocity/velocity_2021_02.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:42:14.548492"
+    },
+    "velocity_2021_03": {
+      "path": "data/panel/velocity/velocity_2021_03.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:42:22.995556"
+    },
+    "velocity_2021_04": {
+      "path": "data/panel/velocity/velocity_2021_04.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:42:32.024486"
+    },
+    "velocity_2021_05": {
+      "path": "data/panel/velocity/velocity_2021_05.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:42:40.640197"
+    },
+    "velocity_2021_06": {
+      "path": "data/panel/velocity/velocity_2021_06.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:42:43.122851"
+    },
+    "velocity_2021_07": {
+      "path": "data/panel/velocity/velocity_2021_07.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:42:51.228103"
+    },
+    "velocity_2021_08": {
+      "path": "data/panel/velocity/velocity_2021_08.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:42:58.945671"
+    },
+    "velocity_2021_09": {
+      "path": "data/panel/velocity/velocity_2021_09.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:43:09.260617"
+    },
+    "velocity_2021_10": {
+      "path": "data/panel/velocity/velocity_2021_10.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:43:17.967644"
+    },
+    "velocity_2021_11": {
+      "path": "data/panel/velocity/velocity_2021_11.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:43:27.812146"
+    },
+    "velocity_2021_12": {
+      "path": "data/panel/velocity/velocity_2021_12.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:43:37.024394"
+    },
+    "velocity_2022_01": {
+      "path": "data/panel/velocity/velocity_2022_01.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:43:52.798968"
+    },
+    "velocity_2022_02": {
+      "path": "data/panel/velocity/velocity_2022_02.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:44:03.116464"
+    },
+    "velocity_2022_03": {
+      "path": "data/panel/velocity/velocity_2022_03.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:44:14.065826"
+    },
+    "velocity_2022_04": {
+      "path": "data/panel/velocity/velocity_2022_04.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:44:25.428289"
+    },
+    "velocity_2022_05": {
+      "path": "data/panel/velocity/velocity_2022_05.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:44:35.707294"
+    },
+    "velocity_2022_06": {
+      "path": "data/panel/velocity/velocity_2022_06.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:44:46.543559"
+    },
+    "velocity_2022_07": {
+      "path": "data/panel/velocity/velocity_2022_07.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:44:55.884716"
+    },
+    "velocity_2022_08": {
+      "path": "data/panel/velocity/velocity_2022_08.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:45:07.085061"
+    },
+    "velocity_2022_09": {
+      "path": "data/panel/velocity/velocity_2022_09.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:45:17.527845"
+    },
+    "velocity_2022_10": {
+      "path": "data/panel/velocity/velocity_2022_10.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:45:27.285915"
+    },
+    "velocity_2022_11": {
+      "path": "data/panel/velocity/velocity_2022_11.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:45:36.932257"
+    },
+    "velocity_2022_12": {
+      "path": "data/panel/velocity/velocity_2022_12.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:45:45.279623"
+    },
+    "velocity_2023_01": {
+      "path": "data/panel/velocity/velocity_2023_01.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:45:55.520312"
+    },
+    "velocity_2023_02": {
+      "path": "data/panel/velocity/velocity_2023_02.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:46:04.643213"
+    },
+    "velocity_2023_03": {
+      "path": "data/panel/velocity/velocity_2023_03.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:46:14.001185"
+    },
+    "velocity_2023_04": {
+      "path": "data/panel/velocity/velocity_2023_04.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:46:24.484377"
+    },
+    "velocity_2023_05": {
+      "path": "data/panel/velocity/velocity_2023_05.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:46:32.486238"
+    },
+    "velocity_2023_06": {
+      "path": "data/panel/velocity/velocity_2023_06.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:46:41.105558"
+    },
+    "velocity_2023_07": {
+      "path": "data/panel/velocity/velocity_2023_07.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:46:50.773946"
+    },
+    "velocity_2023_08": {
+      "path": "data/panel/velocity/velocity_2023_08.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:46:58.291221"
+    },
+    "velocity_2023_09": {
+      "path": "data/panel/velocity/velocity_2023_09.csv",
+      "rows": 2,
+      "collected_at": "2026-02-04T17:47:07.871446"
+    },
+    "throughput_2021_01": {
+      "path": "data/panel/throughput/throughput_2021_01.csv",
+      "rows": 160649,
+      "collected_at": "2026-02-04T17:47:37.500639"
+    },
+    "throughput_2021_02": {
+      "path": "data/panel/throughput/throughput_2021_02.csv",
+      "rows": 162074,
+      "collected_at": "2026-02-04T17:48:02.824409"
+    },
+    "throughput_2021_03": {
+      "path": "data/panel/throughput/throughput_2021_03.csv",
+      "rows": 177773,
+      "collected_at": "2026-02-04T17:48:30.073177"
+    },
+    "throughput_2021_04": {
+      "path": "data/panel/throughput/throughput_2021_04.csv",
+      "rows": 182628,
+      "collected_at": "2026-02-04T17:48:58.322112"
+    },
+    "throughput_2021_05": {
+      "path": "data/panel/throughput/throughput_2021_05.csv",
+      "rows": 171147,
+      "collected_at": "2026-02-04T17:49:24.227566"
+    },
+    "throughput_2021_06": {
+      "path": "data/panel/throughput/throughput_2021_06.csv",
+      "rows": 169724,
+      "collected_at": "2026-02-04T17:49:48.513594"
+    },
+    "throughput_2021_07": {
+      "path": "data/panel/throughput/throughput_2021_07.csv",
+      "rows": 161450,
+      "collected_at": "2026-02-04T17:50:12.377853"
+    },
+    "throughput_2021_08": {
+      "path": "data/panel/throughput/throughput_2021_08.csv",
+      "rows": 150066,
+      "collected_at": "2026-02-04T17:50:35.526931"
+    },
+    "throughput_2021_09": {
+      "path": "data/panel/throughput/throughput_2021_09.csv",
+      "rows": 168239,
+      "collected_at": "2026-02-04T17:51:00.607213"
+    },
+    "throughput_2021_10": {
+      "path": "data/panel/throughput/throughput_2021_10.csv",
+      "rows": 111287,
+      "collected_at": "2026-02-04T17:51:19.116437"
+    },
+    "throughput_2021_11": {
+      "path": "data/panel/throughput/throughput_2021_11.csv",
+      "rows": 187888,
+      "collected_at": "2026-02-04T17:51:45.204277"
+    },
+    "throughput_2021_12": {
+      "path": "data/panel/throughput/throughput_2021_12.csv",
+      "rows": 176554,
+      "collected_at": "2026-02-04T17:52:09.165473"
+    },
+    "throughput_2022_01": {
+      "path": "data/panel/throughput/throughput_2022_01.csv",
+      "rows": 180050,
+      "collected_at": "2026-02-04T17:52:35.704394"
+    },
+    "throughput_2022_02": {
+      "path": "data/panel/throughput/throughput_2022_02.csv",
+      "rows": 177038,
+      "collected_at": "2026-02-04T17:53:01.267352"
+    },
+    "throughput_2022_03": {
+      "path": "data/panel/throughput/throughput_2022_03.csv",
+      "rows": 196807,
+      "collected_at": "2026-02-04T17:53:30.052446"
+    },
+    "throughput_2022_04": {
+      "path": "data/panel/throughput/throughput_2022_04.csv",
+      "rows": 198250,
+      "collected_at": "2026-02-04T17:53:58.258422"
+    },
+    "throughput_2022_05": {
+      "path": "data/panel/throughput/throughput_2022_05.csv",
+      "rows": 204770,
+      "collected_at": "2026-02-04T17:54:26.862411"
+    },
+    "throughput_2022_06": {
+      "path": "data/panel/throughput/throughput_2022_06.csv",
+      "rows": 189345,
+      "collected_at": "2026-02-04T17:54:52.446434"
+    },
+    "throughput_2022_07": {
+      "path": "data/panel/throughput/throughput_2022_07.csv",
+      "rows": 189160,
+      "collected_at": "2026-02-04T17:55:18.185486"
+    },
+    "throughput_2022_08": {
+      "path": "data/panel/throughput/throughput_2022_08.csv",
+      "rows": 201767,
+      "collected_at": "2026-02-04T17:55:45.485497"
+    },
+    "throughput_2022_09": {
+      "path": "data/panel/throughput/throughput_2022_09.csv",
+      "rows": 202407,
+      "collected_at": "2026-02-04T17:56:13.001906"
+    },
+    "throughput_2022_10": {
+      "path": "data/panel/throughput/throughput_2022_10.csv",
+      "rows": 243919,
+      "collected_at": "2026-02-04T17:56:45.793005"
+    },
+    "throughput_2022_11": {
+      "path": "data/panel/throughput/throughput_2022_11.csv",
+      "rows": 229157,
+      "collected_at": "2026-02-04T17:57:13.657854"
+    },
+    "throughput_2022_12": {
+      "path": "data/panel/throughput/throughput_2022_12.csv",
+      "rows": 206451,
+      "collected_at": "2026-02-04T17:57:39.935273"
+    },
+    "throughput_2023_01": {
+      "path": "data/panel/throughput/throughput_2023_01.csv",
+      "rows": 215019,
+      "collected_at": "2026-02-04T17:58:07.166492"
+    },
+    "throughput_2023_02": {
+      "path": "data/panel/throughput/throughput_2023_02.csv",
+      "rows": 223837,
+      "collected_at": "2026-02-04T17:58:36.775766"
+    },
+    "throughput_2023_03": {
+      "path": "data/panel/throughput/throughput_2023_03.csv",
+      "rows": 247602,
+      "collected_at": "2026-02-04T17:59:08.860520"
+    },
+    "throughput_2023_04": {
+      "path": "data/panel/throughput/throughput_2023_04.csv",
+      "rows": 242516,
+      "collected_at": "2026-02-04T17:59:39.450503"
+    },
+    "throughput_2023_05": {
+      "path": "data/panel/throughput/throughput_2023_05.csv",
+      "rows": 246308,
+      "collected_at": "2026-02-04T18:00:10.146943"
+    },
+    "throughput_2023_06": {
+      "path": "data/panel/throughput/throughput_2023_06.csv",
+      "rows": 231788,
+      "collected_at": "2026-02-04T18:00:46.240565"
+    },
+    "throughput_2023_07": {
+      "path": "data/panel/throughput/throughput_2023_07.csv",
+      "rows": 224438,
+      "collected_at": "2026-02-04T18:01:17.664875"
+    },
+    "throughput_2023_08": {
+      "path": "data/panel/throughput/throughput_2023_08.csv",
+      "rows": 224389,
+      "collected_at": "2026-02-04T18:01:50.293674"
+    },
+    "throughput_2023_09": {
+      "path": "data/panel/throughput/throughput_2023_09.csv",
+      "rows": 229279,
+      "collected_at": "2026-02-04T18:02:22.852351"
+    },
+    "throughput_2023_10": {
+      "path": "data/panel/throughput/throughput_2023_10.csv",
+      "rows": 261723,
+      "collected_at": "2026-02-04T18:02:58.881343"
+    },
+    "throughput_2023_11": {
+      "path": "data/panel/throughput/throughput_2023_11.csv",
+      "rows": 257544,
+      "collected_at": "2026-02-04T18:03:34.549832"
+    },
+    "throughput_2023_12": {
+      "path": "data/panel/throughput/throughput_2023_12.csv",
+      "rows": 227554,
+      "collected_at": "2026-02-04T18:04:04.897943"
+    },
+    "throughput_2024_01": {
+      "path": "data/panel/throughput/throughput_2024_01.csv",
+      "rows": 237638,
+      "collected_at": "2026-02-04T18:04:47.862231"
+    },
+    "throughput_2024_02": {
+      "path": "data/panel/throughput/throughput_2024_02.csv",
+      "rows": 242548,
+      "collected_at": "2026-02-04T18:05:19.546762"
+    },
+    "throughput_2024_03": {
+      "path": "data/panel/throughput/throughput_2024_03.csv",
+      "rows": 262028,
+      "collected_at": "2026-02-04T18:05:54.217435"
+    },
+    "throughput_2024_04": {
+      "path": "data/panel/throughput/throughput_2024_04.csv",
+      "rows": 262523,
+      "collected_at": "2026-02-04T18:06:28.211460"
+    },
+    "throughput_2024_05": {
+      "path": "data/panel/throughput/throughput_2024_05.csv",
+      "rows": 266157,
+      "collected_at": "2026-02-04T18:07:01.938543"
+    },
+    "throughput_2024_06": {
+      "path": "data/panel/throughput/throughput_2024_06.csv",
+      "rows": 247446,
+      "collected_at": "2026-02-04T18:07:33.402894"
+    },
+    "throughput_2024_07": {
+      "path": "data/panel/throughput/throughput_2024_07.csv",
+      "rows": 242618,
+      "collected_at": "2026-02-04T18:08:04.556270"
+    },
+    "throughput_2024_08": {
+      "path": "data/panel/throughput/throughput_2024_08.csv",
+      "rows": 235936,
+      "collected_at": "2026-02-04T18:08:33.643525"
+    },
+    "throughput_2024_09": {
+      "path": "data/panel/throughput/throughput_2024_09.csv",
+      "rows": 204240,
+      "collected_at": "2026-02-04T18:09:00.686589"
+    },
+    "throughput_2024_11": {
+      "path": "data/panel/throughput/throughput_2024_11.csv",
+      "rows": 269299,
+      "collected_at": "2026-02-04T18:09:42.953094"
+    },
+    "throughput_2024_12": {
+      "path": "data/panel/throughput/throughput_2024_12.csv",
+      "rows": 252715,
+      "collected_at": "2026-02-04T18:10:15.957707"
+    },
+    "throughput_2025_01": {
+      "path": "data/panel/throughput/throughput_2025_01.csv",
+      "rows": 248717,
+      "collected_at": "2026-02-04T18:10:45.554908"
+    },
+    "throughput_2025_02": {
+      "path": "data/panel/throughput/throughput_2025_02.csv",
+      "rows": 261650,
+      "collected_at": "2026-02-04T18:11:17.672310"
+    },
+    "throughput_2025_03": {
+      "path": "data/panel/throughput/throughput_2025_03.csv",
+      "rows": 292963,
+      "collected_at": "2026-02-04T18:11:52.851222"
+    },
+    "throughput_2025_04": {
+      "path": "data/panel/throughput/throughput_2025_04.csv",
+      "rows": 298307,
+      "collected_at": "2026-02-04T18:12:27.359052"
+    },
+    "throughput_2025_05": {
+      "path": "data/panel/throughput/throughput_2025_05.csv",
+      "rows": 293979,
+      "collected_at": "2026-02-04T18:13:00.023079"
+    },
+    "throughput_2025_06": {
+      "path": "data/panel/throughput/throughput_2025_06.csv",
+      "rows": 256033,
+      "collected_at": "2026-02-04T18:13:30.895627"
+    }
+  },
+  "errors": {},
+  "last_updated": "2026-02-04T18:13:30.895644"
+}
