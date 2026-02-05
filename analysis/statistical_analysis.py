@@ -33,7 +33,7 @@ try:
 except ImportError:
     STATSMODELS_AVAILABLE = False
 
-from data_model import TREATMENT_START
+from .data_model import TREATMENT_START
 
 
 @dataclass

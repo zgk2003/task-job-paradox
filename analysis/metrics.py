@@ -26,7 +26,7 @@ from typing import List, Dict, Any
 from datetime import datetime
 from collections import defaultdict
 
-from data_model import (
+from .data_model import (
     Repository, PullRequest, Language,
     TREATMENT_START, PRE_PERIOD_START, POST_PERIOD_END
 )

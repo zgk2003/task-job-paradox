@@ -17,7 +17,7 @@ from typing import List, Tuple
 import uuid
 from dataclasses import dataclass
 
-from data_model import (
+from .data_model import (
     Repository, PullRequest, Commit, Review, ReviewComment,
     CIRun, Release, Language, PRState, CIStatus,
     TREATMENT_START, PRE_PERIOD_START, POST_PERIOD_END

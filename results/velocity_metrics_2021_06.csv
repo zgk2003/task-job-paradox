@@ -1,0 +1,3 @@
+high_exposure,year_month,num_prs,num_repos,num_authors,avg_lead_time_hours,median_lead_time_hours,p75_lead_time_hours,p90_lead_time_hours,std_lead_time_hours,avg_time_to_review_hours,median_time_to_review_hours,avg_pr_size,median_pr_size
+True,2021-06,1102066,217001,167994,38.65510595554167,0,15,117,106.17082469158699,35.42470957095709,1,3240.073104514612,37
+False,2021-06,5746,1454,1635,52.224155934563164,2,40,167,115.27710987194095,43.75418125243097,3,4107.570657848937,50
