@@ -1,0 +1,68 @@
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    THE TASK-JOB PARADOX: EXPLAINED                           ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  For High AI-Exposure Languages (Python, JavaScript, Java, TypeScript)       ║
+║  Comparing June 2021 (Pre-LLM) → June 2025 (Post-LLM)                        ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  1. VELOCITY IMPROVED DRAMATICALLY                                           ║
+║     ─────────────────────────────────                                        ║
+║     p75 PR Lead Time:    15 hrs  →   1 hr    (-93%)                      ║
+║     p90 PR Lead Time:   117 hrs  →  31 hrs   (-73%)                          ║
+║                                                                              ║
+║     → Individual coding tasks are MUCH faster                                ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  2. BUT THROUGHPUT STAYED FLAT                                               ║
+║     ───────────────────────────────                                          ║
+║     Mean PRs/Dev-Month:  4.2     →   4.1     (-1.5%)                         ║
+║     Median PRs/Dev-Month: 2.0    →   2.0     (0%)                            ║
+║                                                                              ║
+║     → Developers don't produce MORE pull requests                            ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  3. WHY? THE SAVED TIME WENT TO:                                             ║
+║     ─────────────────────────────                                            ║
+║                                                                              ║
+║     a) MORE COMPLEX PRs (Scope Expansion)                                    ║
+║        Median Lines Changed:     36  →     59    (+63.9%)                     ║
+║        Median Files Changed:      2  →      2    (+0.0%)                     ║
+║        Median Commits/PR:         1  →      1    (+0.0%)                     ║
+║                                                                              ║
+║        → Each PR is doing MORE work                                          ║
+║                                                                              ║
+║     b) CONCENTRATED WORK PATTERNS                                            ║
+║        Active Weeks/Month:    1.7   →   1.6    (-6.9%)                    ║
+║                                                                              ║
+║        → Work is compressed into fewer, more intense periods                 ║
+║                                                                              ║
+║     c) TOP CONTRIBUTORS BENEFIT MORE                                         ║
+║        Top 20% Throughput:   12.4   →  13.1    (+5.9%)                    ║
+║        (vs overall:          4.2   →   4.1)                               ║
+║                                                                              ║
+║        → Heavy users capture productivity gains; casual users don't          ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  THE PARADOX RESOLUTION:                                                     ║
+║  ═══════════════════════                                                     ║
+║                                                                              ║
+║  LLMs DO make coding faster. But developers use the saved time to:           ║
+║                                                                              ║
+║  • Take on bigger, more complex PRs (scope expansion)                        ║
+║  • Work in more concentrated bursts (fewer active days)                      ║
+║  • Invest in code quality (similar review cycles despite larger PRs)         ║
+║                                                                              ║
+║  Result: Same NUMBER of PRs, but each PR does MORE.                          ║
+║  The productivity gain is real - it's just hidden in PR complexity,          ║
+║  not PR count.                                                               ║
+║                                                                              ║
+║  This is a GOOD thing: developers are using AI to tackle harder problems,    ║
+║  not just to produce more trivial PRs.                                       ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝

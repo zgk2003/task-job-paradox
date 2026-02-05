@@ -23,7 +23,7 @@ except ImportError:
     MATPLOTLIB_AVAILABLE = False
     print("Warning: matplotlib not available. Visualizations will be skipped.")
 
-from data_model import TREATMENT_START, AI_ADOPTION_EVENTS
+from .data_model import TREATMENT_START, AI_ADOPTION_EVENTS
 
 
 def setup_style():
